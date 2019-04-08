@@ -1,0 +1,139 @@
+<div class="container">
+  <div [hidden]="submitted">
+    <h1>Food Pantry Intake Form</h1>
+    <form (ngSubmit)="onSubmit()" #customerForm="ngForm" novalidate>
+
+      <div class="form-group">
+        <label for="studentId"><h3>Student ID Number</h3></label>
+        <input type="number" class="form-control" id="studentId"
+               required
+               [(ngModel)]="model.studentId" name="studentId"
+               #studentId="ngModel">
+        <div [hidden]="studentId.valid || studentId.pristine"
+             class="alert alert-danger">
+          Student ID is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <h3>Do you have any of the following supplemental services? Please select all that apply.</h3>
+        <label for="FAFSA">FAFSA</label>
+        <input type="checkbox" class="form-control" id="FAFSA"
+               [(ngModel)]="model.FAFSA" name="FAFSA">
+
+      </div>
+      <div class="form-group">
+        <label for="SNAP">SNAP</label>
+        <input type="checkbox" class="form-control" id="SNAP"
+               [(ngModel)]="model.SNAP" name="SNAP">
+      </div>
+      <div class="form-group">
+        <label for="WIC">WIC</label>
+        <input type="checkbox" class="form-control" id="WIC"
+               [(ngModel)]="model.WIC" name="WIC">
+      </div>
+      <div class="form-group">
+        <label for="SSI">SSI</label>
+        <input type="checkbox" class="form-control" id="SSI"
+               [(ngModel)]="model.SSI" name="SSI">
+      </div>
+      <div class="form-group">
+        <label for="TAFDC">TAFDC</label>
+        <input type="checkbox" class="form-control" id="TAFDC"
+               [(ngModel)]="model.TAFDC" name="TAFDC">
+      </div>
+      <div class="form-group">
+        <label for="MRC">MRC</label>
+        <input type="checkbox" class="form-control" id="MRC"
+               [(ngModel)]="model.MRC" name="MRC">
+      </div>
+
+      <div class="form-group">
+        <label for="SNAPAssistance"><h3>Please check the following box if you would like assistance in applying for SNAP.</h3></label>
+        <input type="checkbox" class="form-control" id="SNAPAssistance"
+               [(ngModel)]="model.SNAPAssistance" name="SNAPAssistance">
+      </div>
+
+      <div class="form-group">
+        <label for="currentHousingSituation"><h3>What is your current housing situation?</h3></label>
+        <select class="form-control" id="currentHousingSituation"
+                required
+                [(ngModel)]="model.currentHousingSituation" name="currentHousingSituation"
+                #currentHousingSituation="ngModel">
+          <option *ngFor="let opt_h of currentHousingSituations" [value]="opt_h">{{opt_h}}</option>
+        </select>
+        <div [hidden]="currentHousingSituation.valid || currentHousingSituation.pristine" class="alert alert-danger">
+          Current housing situation is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <h3>The following image is of The Emergency Food Assistance Program income guidelines. Please indicate whether or not you would fall under any of the following options according to your income and the number of people in your household.</h3>
+        <label for="federalIncomeGuideline">Applicable Federal Income Guideline Option</label>
+        <select class="form-control" id="federalIncomeGuideline"
+                required
+                [(ngModel)]="model.federalIncomeGuideline" name="federalIncomeGuideline"
+                #federalIncomeGuideline="ngModel">
+          <option *ngFor="let opt_f of federalIncomeGuidelines" [value]="opt_f">{{opt_f}}</option>
+        </select>
+        <div [hidden]="federalIncomeGuideline.valid || federalIncomeGuideline.pristine" class="alert alert-danger">
+          Federal income guideline is required
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-success" [disabled]="!customerForm.form.valid">Submit</button>
+    </form>
+  </div>
+
+  <div [hidden]="!submitted">
+    <h2>You submitted the following:</h2>
+    <div class="row">
+      <div class="col-xs-3">Student ID: </div>
+      <div class="col-xs-9">{{ model.studentId }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">FAFSA Status: </div>
+      <div class="col-xs-9">{{ model.FAFSA }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">SNAP status: </div>
+      <div class="col-xs-9">{{ model.SNAP }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">WIC Status: </div>
+      <div class="col-xs-9">{{ model.WIC }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">SSI Status: </div>
+      <div class="col-xs-9">{{ model.SSI }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">TAFDC Status:</div>
+      <div class="col-xs-9">{{ model.TAFDC }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">MRC Status:</div>
+      <div class="col-xs-9">{{ model.MRC }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">SNAP Assistance Requested:</div>
+      <div class="col-xs-9">{{ model.SNAPAssistance }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">Current Housing Situation:</div>
+      <div class="col-xs-9">{{ model.currentHousingSituation }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">Federal Income Guideline:</div>
+      <div class="col-xs-9">{{ model.federalIncomeGuideline }}</div>
+    </div>
+    <br>
+    <button class="btn btn-primary" (click)="submitted=false">Edit</button>
+  </div>
+</div>
+
+<!--
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://angular.io/license
+-->
